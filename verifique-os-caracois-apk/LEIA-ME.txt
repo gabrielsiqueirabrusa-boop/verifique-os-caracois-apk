@@ -1,0 +1,9 @@
+Projeto do app Android (APK) do Verifique os caracóis.
+
+Como gerar o APK:
+1. Crie um repositório novo no GitHub (pode ser público ou privado).
+2. Envie TODOS os arquivos desta pasta para o repositório, inclusive a pasta .github.
+3. Abra a aba "Actions" do repositório. O build começa sozinho (leva uns 5 a 10 minutos).
+   Se não começar, clique em "Gerar APK" e depois em "Run workflow".
+4. Quando ficar verde, clique na execução e baixe "verifique-os-caracois-apk" em Artifacts.
+5. Extraia o zip baixado, passe o verifique-os-caracois.apk para o celular e instale.

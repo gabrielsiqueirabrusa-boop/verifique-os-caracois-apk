@@ -1,0 +1,10 @@
+{
+  "appId": "com.verifique.caracois",
+  "appName": "Verifique os caracóis",
+  "webDir": "www",
+  "backgroundColor": "#0e211d",
+  "android": {
+    "backgroundColor": "#0e211d",
+    "adjustMarginsForEdgeToEdge": "auto"
+  }
+}

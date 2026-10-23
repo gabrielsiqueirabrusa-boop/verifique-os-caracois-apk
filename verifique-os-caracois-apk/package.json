@@ -1,0 +1,13 @@
+{
+  "name": "verifique-os-caracois",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/cli": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@fontsource/bowlby-one": "^5.0.0",
+    "@fontsource/figtree": "^5.0.0",
+    "@fontsource/jetbrains-mono": "^5.0.0"
+  }
+}
