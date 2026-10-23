@@ -1,0 +1,58 @@
+name: Gerar APK
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  apk:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Instalar dependências
+        run: npm install
+
+      - name: Copiar fontes para dentro do app
+        run: |
+          for f in bowlby-one-latin-400-normal figtree-latin-500-normal figtree-latin-700-normal jetbrains-mono-latin-500-normal; do
+            pkg=${f%%-latin*}
+            cp "node_modules/@fontsource/$pkg/files/$f.woff2" www/fonts/ || echo "fonte $f não encontrada, seguindo sem ela"
+          done
+          ls -l www/fonts
+
+      - name: Criar o projeto Android
+        run: npx cap add android
+
+      - name: Aplicar ícone e tela de abertura
+        run: |
+          cp -r icons/mipmap-* android/app/src/main/res/
+          cp icons/values/ic_launcher_background.xml android/app/src/main/res/values/
+          find android/app/src/main/res -name splash.png -exec cp icons/splash.png {} \;
+
+      - name: Copiar o jogo para o app
+        run: npx cap sync android
+
+      - name: Compilar o APK
+        working-directory: android
+        run: |
+          chmod +x gradlew
+          ./gradlew assembleDebug
+
+      - name: Guardar o APK
+        run: cp android/app/build/outputs/apk/debug/app-debug.apk verifique-os-caracois.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verifique-os-caracois-apk
+          path: verifique-os-caracois.apk
